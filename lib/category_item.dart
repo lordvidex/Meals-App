@@ -1,4 +1,3 @@
-import 'package:deli_meals/category_details.dart';
 import 'package:flutter/material.dart';
 
 class CategoryItem extends StatelessWidget {
@@ -7,20 +6,14 @@ class CategoryItem extends StatelessWidget {
   final Color color;
   const CategoryItem({this.title, this.color, this.id});
   void openCategoryDetails(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (_) => CategoryDetails(
-          categoryId: id,
-          categoryTitle: title,
-        ),
-      ),
-    );
+    Navigator.of(context)
+        .pushNamed('/category_details', arguments: {'id': id, 'title': title});
   }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: ()=> openCategoryDetails(context),
+      onTap: () => openCategoryDetails(context),
       splashColor: Theme.of(context).primaryColor,
       borderRadius: BorderRadius.circular(15),
       child: Container(
