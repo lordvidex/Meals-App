@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import './screens/categories_screen.dart';
 import './screens/category_meals_screen.dart';
 import './screens/category_meals_details_screen.dart';
+import './screens/error_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -39,6 +40,9 @@ class MyApp extends StatelessWidget {
       routes: {
         CategoryDetails.routeName: (ctx)=>CategoryDetails(),
         MealDetailsScreen.routeName:(ctx)=>MealDetailsScreen(),
+      },
+      onUnknownRoute: (settings){
+        return MaterialPageRoute(builder: (context)=>ErrorPage());
       },
     );
   }
