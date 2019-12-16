@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import './dummy-data.dart';
+import '../dummy-data.dart';
+import '../widgets/meal_item.dart';
 
 class CategoryDetails extends StatelessWidget {
   // final String categoryId;
@@ -24,7 +25,13 @@ class CategoryDetails extends StatelessWidget {
       body: ListView.builder(
           itemCount: categoryItems.length,
           itemBuilder: (ctx, index) {
-            return Text(categoryItems[index].title);
+            return MealItem(
+              title: categoryItems[index].title,
+              affordability: categoryItems[index].affordability,
+              complexity: categoryItems[index].complexity,
+              duration: categoryItems[index].duration,
+              imageUrl: categoryItems[index].imageUrl,
+            );
           }),
     );
   }
