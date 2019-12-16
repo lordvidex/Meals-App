@@ -4,6 +4,7 @@ import '../dummy-data.dart';
 import '../widgets/meal_item.dart';
 
 class CategoryDetails extends StatelessWidget {
+  static const routeName = '/category-meals';
   // final String categoryId;
   // final String categoryTitle;
   // const CategoryDetails({this.categoryId, this.categoryTitle});
@@ -26,6 +27,7 @@ class CategoryDetails extends StatelessWidget {
           itemCount: categoryItems.length,
           itemBuilder: (ctx, index) {
             return MealItem(
+              id: categoryItems[index].id,
               title: categoryItems[index].title,
               affordability: categoryItems[index].affordability,
               complexity: categoryItems[index].complexity,
