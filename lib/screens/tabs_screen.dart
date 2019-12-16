@@ -9,39 +9,49 @@ class TabsScreen extends StatefulWidget {
 }
 
 class _TabsScreenState extends State<TabsScreen> {
+  var _currentIndex = 0;
+  final List<Map<String, Object>> _tabs = [
+    {
+      'page': CategoriesScreen(),
+      'title': 'Categories',
+    },
+    {
+      'page': FavoritesScreen(),
+      'title': 'Favorites',
+    },
+  ];
+  void _tabClicked(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
   @override
   Widget build(BuildContext context) {
-    return 
-    DefaultTabController(
-      length: 2,
-      initialIndex: 0,
-      child: 
-      Scaffold(
-        appBar: AppBar(
-          title: const Text('Meals'),
-          bottom: TabBar(
-
-            tabs: <Widget>[
-              Tab(
-                icon: const Icon(
-                  Icons.category,
-                ),
-                text: 'Categories',
-              ),
-              Tab(
-                icon: const Icon(Icons.star),
-                text: 'Favorites',
-              ),
-            ],
-          ),
-        ),
-        body: TabBarView(
-          children: <Widget>[
-            CategoriesScreen(),
-            FavoritesScreen(),
-          ],
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(_tabs[_currentIndex]['title']),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        
+        items: [
+          BottomNavigationBarItem(
+            backgroundColor: Theme.of(context).primaryColor,
+            icon: Icon(Icons.category),
+            title: const Text('Categories'),
+          ),
+          BottomNavigationBarItem(
+            backgroundColor: Theme.of(context).primaryColor,
+            icon: Icon(Icons.star),
+            title: const Text('Favorites'),
+          )
+        ],
+        currentIndex: _currentIndex,
+        onTap: _tabClicked,
+        type: BottomNavigationBarType.shifting,
+        selectedItemColor: Theme.of(context).accentColor,
+        unselectedItemColor: Colors.white,
+      ),
+      body: _tabs[_currentIndex]['page'],
     );
   }
 }
