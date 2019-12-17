@@ -19,7 +19,7 @@ class MainDrawer extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.of(context).pushNamed(routeName);
+        Navigator.of(context).pushReplacementNamed(routeName);
       },
     );
   }
