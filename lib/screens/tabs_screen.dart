@@ -3,24 +3,34 @@ import 'package:flutter/material.dart';
 import './categories_screen.dart';
 import './category_meals_favorites_screen.dart';
 import '../widgets/main_drawer.dart';
+import '../models/meal.dart';
 
 class TabsScreen extends StatefulWidget {
+  final List<Meal>favoriteMeals;
+
+  const TabsScreen(this.favoriteMeals);
+
   @override
   _TabsScreenState createState() => _TabsScreenState();
 }
 
 class _TabsScreenState extends State<TabsScreen> {
   var _currentIndex = 0;
-  final List<Map<String, Object>> _tabs = [
+  List<Map<String, Object>> _tabs;
+  @override
+  void initState() {
+    _tabs = [
     {
       'page': CategoriesScreen(),
       'title': 'Categories',
     },
     {
-      'page': FavoritesScreen(),
+      'page': FavoritesScreen(widget.favoriteMeals),
       'title': 'Favorites',
     },
   ];
+    super.initState();
+  }
   void _tabClicked(int index) {
     setState(() {
       _currentIndex = index;
@@ -50,6 +60,7 @@ class _TabsScreenState extends State<TabsScreen> {
         currentIndex: _currentIndex,
         onTap: _tabClicked,
         type: BottomNavigationBarType.shifting,
+        showUnselectedLabels: true,
         selectedItemColor: Theme.of(context).accentColor,
         unselectedItemColor: Colors.white,
       ),
