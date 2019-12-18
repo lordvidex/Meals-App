@@ -6,6 +6,9 @@ import '../models/meal.dart';
 
 class CategoryDetails extends StatefulWidget {
   static const routeName = '/category-meals';
+  final List<Meal> filteredMeals;
+
+  const CategoryDetails(this.filteredMeals);
 
   @override
   _CategoryDetailsState createState() => _CategoryDetailsState();
@@ -27,13 +30,15 @@ class _CategoryDetailsState extends State<CategoryDetails> {
       categoryId = properties['id'];
     categoryTitle = properties['title'];
 
-    categoryItems = DUMMY_MEALS
+    categoryItems = widget.filteredMeals
         .where((meal) => meal.categories.contains(categoryId))
         .toList();
         hasLoadedCategoryItems = true;
     }
     super.didChangeDependencies();
   }
+
+
   void _removeMeal(String mealId){
     categoryItems.removeWhere((meal)=>meal.id==mealId);
   }
@@ -45,7 +50,9 @@ class _CategoryDetailsState extends State<CategoryDetails> {
       appBar: AppBar(
         title: Text(categoryTitle),
       ),
-      body: ListView.builder(
+      body:
+      //TODO: Return an emptyView screen 
+      ListView.builder(
           itemCount: categoryItems.length,
           itemBuilder: (ctx, index) {
             return MealItem(

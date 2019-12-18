@@ -55,6 +55,7 @@ class MainDrawer extends StatelessWidget {
             '/',
             context,
           ),
+          SizedBox(height: 20,),
           drawerItems(
             'Filters',
             Icons.settings,
